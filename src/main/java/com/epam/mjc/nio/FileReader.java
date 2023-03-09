@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +15,7 @@ public class FileReader {
     private static final Logger log = Logger.getLogger(FileReader.class.getName());
 
     public Profile getDataFromFile(File file) {
-        HashMap<String, String> profileMap = extractMapFromFile(file);
+        Map<String, String> profileMap = extractMapFromFile(file);
         return new Profile(
                 profileMap.get("Name"),
                 Integer.parseInt(profileMap.get("Age")),
@@ -23,7 +24,7 @@ public class FileReader {
         );
     }
 
-    public HashMap<String, String> extractMapFromFile(File file) {
+    public Map<String, String> extractMapFromFile(File file) {
         HashMap<String, String> map = new HashMap<>();
         try (RandomAccessFile accessFile = new RandomAccessFile(file, "r");
              FileChannel inChannel = accessFile.getChannel()) {
